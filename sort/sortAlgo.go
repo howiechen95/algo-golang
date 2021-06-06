@@ -14,6 +14,22 @@ func BubbleSort(arr []int) {
 	}
 }
 
+func InsertionSort(arr []int) {
+	for i := 1; i < len(arr); i++ {
+		preIndex := i - 1
+		current := arr[i]
+		for {
+			if preIndex >= 0 && arr[preIndex] > current {
+				arr[preIndex+1] = arr[preIndex]
+				preIndex--
+			} else {
+				break
+			}
+		}
+		arr[preIndex+1] = current
+	}
+}
+
 func main() {
 	testCases := [][]int{
 		{},
@@ -25,7 +41,7 @@ func main() {
 		{3, 4, 2, 5, 1},
 	}
 	for _, testCase := range testCases {
-		BubbleSort(testCase)
+		InsertionSort(testCase)
 		fmt.Println(testCase)
 	}
 }
