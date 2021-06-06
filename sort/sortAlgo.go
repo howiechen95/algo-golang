@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func BubbleSort(arr []int) {
-	for i := 0; i < len(arr); i++ {
+	for i := 0; i < len(arr)-1; i++ {
 		for j := 0; j < len(arr)-i-1; j++ {
 			if arr[j+1] < arr[j] {
 				tmp := arr[j+1]
