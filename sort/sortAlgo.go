@@ -49,6 +49,29 @@ func ShellSort(arr []int) {
 	}
 }
 
+
+func MergeSort(arr []int) []int{
+	length := len(arr)
+	if length < 2{
+		return arr
+	}
+	middle := length / 2
+	left := arr[0:middle]
+	right := arr[middle:]
+	return merge(MergeSort(left), MergeSort(right))
+}
+
+func merge(left []int, right []int)  []int{
+	for{
+		result := []int{}
+		if(len(left) > 0 && len(right) > 0){
+			if left[0] <= right[0]{
+				//append(result, left)
+			}
+		}
+	}
+}
+
 func main() {
 	testCases := [][]int{
 		{},
