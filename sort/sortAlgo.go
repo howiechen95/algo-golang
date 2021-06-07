@@ -30,6 +30,25 @@ func InsertionSort(arr []int) {
 	}
 }
 
+func ShellSort(arr []int) {
+	length := len(arr)
+	for gap := length / 2; gap > 0; gap = gap / 2 {
+		for i := gap; i < length; i++ {
+			j := i
+			current := arr[i]
+			for {
+				if j-gap >= 0 && current < arr[j-gap] {
+					arr[j] = arr[j-gap]
+					j = j - gap
+				} else {
+					break
+				}
+			}
+			arr[j] = current
+		}
+	}
+}
+
 func main() {
 	testCases := [][]int{
 		{},
@@ -41,7 +60,7 @@ func main() {
 		{3, 4, 2, 5, 1},
 	}
 	for _, testCase := range testCases {
-		InsertionSort(testCase)
+		ShellSort(testCase)
 		fmt.Println(testCase)
 	}
 }
