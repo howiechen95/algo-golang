@@ -49,10 +49,9 @@ func ShellSort(arr []int) {
 	}
 }
 
-
-func MergeSort(arr []int) []int{
+func MergeSort(arr []int) []int {
 	length := len(arr)
-	if length < 2{
+	if length < 2 {
 		return arr
 	}
 	middle := length / 2
@@ -61,15 +60,39 @@ func MergeSort(arr []int) []int{
 	return merge(MergeSort(left), MergeSort(right))
 }
 
-func merge(left []int, right []int)  []int{
-	for{
-		result := []int{}
-		if(len(left) > 0 && len(right) > 0){
-			if left[0] <= right[0]{
-				//append(result, left)
-			}
+func merge(left []int, right []int) []int {
+	leftIdx, rightIdx := 0, 0
+	leftSize, rightSize := len(left), len(right)
+	result := []int{}
+	for {
+		if leftIdx > leftSize-1 || rightIdx > rightSize-1 {
+			break
+		}
+		if left[leftIdx] < right[rightIdx] {
+			result = append(result, left[leftIdx])
+			leftIdx++
+		} else {
+			result = append(result, right[rightIdx])
+			rightIdx++
 		}
 	}
+
+	for {
+		if leftIdx > leftSize-1 {
+			break
+		}
+		result = append(result, left[leftIdx])
+		leftIdx++
+	}
+
+	for {
+		if rightIdx > rightSize-1 {
+			break
+		}
+		result = append(result, right[rightIdx])
+		rightIdx++
+	}
+	return result
 }
 
 func main() {
@@ -83,7 +106,7 @@ func main() {
 		{3, 4, 2, 5, 1},
 	}
 	for _, testCase := range testCases {
-		ShellSort(testCase)
-		fmt.Println(testCase)
+		a:=MergeSort(testCase)
+		fmt.Println(a)
 	}
 }
