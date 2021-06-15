@@ -64,10 +64,7 @@ func merge(left []int, right []int) []int {
 	leftIdx, rightIdx := 0, 0
 	leftSize, rightSize := len(left), len(right)
 	result := []int{}
-	for {
-		if leftIdx > leftSize-1 || rightIdx > rightSize-1 {
-			break
-		}
+	for ; leftIdx <= leftSize-1 && rightIdx <= rightSize-1; {
 		if left[leftIdx] < right[rightIdx] {
 			result = append(result, left[leftIdx])
 			leftIdx++
@@ -77,18 +74,12 @@ func merge(left []int, right []int) []int {
 		}
 	}
 
-	for {
-		if leftIdx > leftSize-1 {
-			break
-		}
+	for ; leftIdx <= leftSize-1; {
 		result = append(result, left[leftIdx])
 		leftIdx++
 	}
 
-	for {
-		if rightIdx > rightSize-1 {
-			break
-		}
+	for ; rightIdx <= rightSize-1; {
 		result = append(result, right[rightIdx])
 		rightIdx++
 	}
@@ -106,7 +97,7 @@ func main() {
 		{3, 4, 2, 5, 1},
 	}
 	for _, testCase := range testCases {
-		a:=MergeSort(testCase)
+		a := MergeSort(testCase)
 		fmt.Println(a)
 	}
 }
