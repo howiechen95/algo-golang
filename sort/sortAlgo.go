@@ -14,6 +14,21 @@ func BubbleSort(arr []int) {
 	}
 }
 
+func SelectionSort(arr []int) []int {
+	for curIdx := 0; curIdx < len(arr); curIdx++ {
+		minIdx := curIdx
+		for j := curIdx + 1; j < len(arr); j++ {
+			if arr[j] < arr[minIdx] {
+				minIdx = j
+			}
+		}
+		tmp := arr[curIdx]
+		arr[curIdx] = arr[minIdx]
+		arr[minIdx] = tmp
+	}
+	return arr
+}
+
 func InsertionSort(arr []int) {
 	for i := 1; i < len(arr); i++ {
 		preIndex := i - 1
@@ -64,7 +79,7 @@ func merge(left []int, right []int) []int {
 	leftIdx, rightIdx := 0, 0
 	leftSize, rightSize := len(left), len(right)
 	result := []int{}
-	for ; leftIdx <= leftSize-1 && rightIdx <= rightSize-1; {
+	for leftIdx <= leftSize-1 && rightIdx <= rightSize-1 {
 		if left[leftIdx] < right[rightIdx] {
 			result = append(result, left[leftIdx])
 			leftIdx++
@@ -74,12 +89,12 @@ func merge(left []int, right []int) []int {
 		}
 	}
 
-	for ; leftIdx <= leftSize-1; {
+	for leftIdx <= leftSize-1 {
 		result = append(result, left[leftIdx])
 		leftIdx++
 	}
 
-	for ; rightIdx <= rightSize-1; {
+	for rightIdx <= rightSize-1 {
 		result = append(result, right[rightIdx])
 		rightIdx++
 	}
@@ -97,7 +112,7 @@ func main() {
 		{3, 4, 2, 5, 1},
 	}
 	for _, testCase := range testCases {
-		a := MergeSort(testCase)
+		a := SelectionSort(testCase)
 		fmt.Println(a)
 	}
 }
