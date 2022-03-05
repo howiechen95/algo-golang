@@ -6,6 +6,31 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+var pre, root *TreeNode
+
+// 空间复杂度 O(1) 解法
+func Convert(pRootOfTree *TreeNode) *TreeNode {
+	if pRootOfTree == nil {
+		return pRootOfTree
+	}
+	// 递归左子树
+	Convert(pRootOfTree.Left)
+	// 判断特殊情况
+	if root == nil {
+		root = pRootOfTree
+	}
+	// 修改遍历结点为双向链表
+	if pre != nil {
+		pRootOfTree.Left = pre
+		pre.Right = pRootOfTree
+	}
+	// 更新 pre
+	pre = pRootOfTree
+	// 递归右子树
+	Convert(pRootOfTree.Right)
+	return root
+}
+
 var treeList []*TreeNode
 
 func inorder(root *TreeNode) {
@@ -17,7 +42,7 @@ func inorder(root *TreeNode) {
 	inorder(root.Right)
 }
 
-func Convert(pRootOfTree *TreeNode) *TreeNode {
+func Convert2(pRootOfTree *TreeNode) *TreeNode {
 	if pRootOfTree == nil {
 		return pRootOfTree
 	}
