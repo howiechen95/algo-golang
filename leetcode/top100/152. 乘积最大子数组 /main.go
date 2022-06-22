@@ -1,21 +1,36 @@
 package main
 
-func maxProduct(nums []int) int {
-	maxF, minF, ans := nums[0], nums[0], nums[0]
-	for i := 1; i < len(nums); i++ {
-		mx, mn := maxF, minF
-		maxF = max(mx*nums[i], max(nums[i], mn*nums[i]))
-		minF = min(mn*nums[i], min(nums[i], mx*nums[i]))
-		ans = max(maxF, ans)
-	}
-	return ans
+import "math"
+
+type MinStack struct {
+	stack    []int
+	minStack []int
 }
 
-func max(x, y int) int {
-	if x > y {
-		return x
+func Constructor() MinStack {
+	return MinStack{
+		stack:    []int{},
+		minStack: []int{math.MaxInt64},
 	}
-	return y
+}
+
+func (this *MinStack) Push(x int) {
+	this.stack = append(this.stack, x)
+	top := this.minStack[len(this.minStack)-1]
+	this.minStack = append(this.minStack, min(x, top))
+}
+
+func (this *MinStack) Pop() {
+	this.stack = this.stack[:len(this.stack)-1]
+	this.minStack = this.minStack[:len(this.minStack)-1]
+}
+
+func (this *MinStack) Top() int {
+	return this.stack[len(this.stack)-1]
+}
+
+func (this *MinStack) GetMin() int {
+	return this.minStack[len(this.minStack)-1]
 }
 
 func min(x, y int) int {
