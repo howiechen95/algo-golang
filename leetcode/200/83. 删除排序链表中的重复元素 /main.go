@@ -9,7 +9,6 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	if head == nil {
 		return head
 	}
-	res := head
 	cur := head
 	for cur.Next != nil {
 		if cur.Val == cur.Next.Val {
@@ -17,5 +16,5 @@ func deleteDuplicates(head *ListNode) *ListNode {
 		}
 		cur = cur.Next
 	}
-	return res
+	return head
 }
